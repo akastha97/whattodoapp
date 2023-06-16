@@ -20,5 +20,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-      - lib/assets/todo-image.png
-      - lib/assets/
+    - lib/assets/todo-image.png
+    - lib/assets/todo-2.png
+    - lib/assets/todo-3.png
