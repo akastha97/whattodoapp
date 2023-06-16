@@ -7,8 +7,10 @@ environment:
   sdk: '>=2.19.4 <3.0.0'
 
 dependencies:
+  carousel_slider: ^4.2.1
   flutter:
     sdk: flutter
+carousel_slider: ^4.2.1 
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+      - lib/assets/todo-image.png
+      - lib/assets/
