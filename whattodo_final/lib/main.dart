@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:whattodo_final/models/carousel_model.dart';
 import 'package:whattodo_final/screens/dashboard.dart';
+import 'package:flutter/scheduler.dart' show timeDilation;
+import 'package:whattodo_final/screens/events.dart';
+
+import 'ui_components/custom_appbar.dart';
 
 void main() {
+  timeDilation = 2.0;
   runApp(const MainApp());
 }
 
@@ -14,46 +19,30 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
-  late Animation<double> animation;
-  late AnimationController controller;
-
+class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
-    controller =
-        AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
-      ..addListener(() {
-        setState(() {
-         
-        });
-      });
-    controller.forward();
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
+  // This is for the body of the main screen
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
         '/dashboard': (context) => const DashboardScreen(),
+        '/eventsscreen': (context) => const EventsScreen(),
       },
-      // 51 50 55
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: const CustomAppbar(
+          isDisplay: false,
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 100,
+                height: 30,
               ),
               buildCarousel(),
               const SizedBox(
@@ -67,7 +56,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
     );
   }
 
-  // This is to display the Button
+  // This is to display the Get started button
   Builder buildGetStartedButton(BuildContext context) {
     return Builder(builder: (context) {
       return ElevatedButton(
@@ -78,14 +67,35 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               elevation: 10,
               backgroundColor: Colors.deepOrange),
           onPressed: () {
-            Navigator.pushNamed(context, "/dashboard");
+            Navigator.of(context).push(navigateToDashboard());
           },
           child: const Text("Get Started"));
     });
   }
 
+  // animation for splash
+  Route navigateToDashboard() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const DashboardScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.decelerate;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
   // This is to display the carousel slider
-  Container buildCarousel() {
+  Widget buildCarousel() {
     return Container(
       height: 600,
       decoration: const BoxDecoration(
@@ -105,6 +115,9 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
           CarouselSlider.builder(
             itemCount: CarouselModel.carouselModelList.length,
             options: CarouselOptions(
+              autoPlayCurve: Curves.decelerate,
+              autoPlay: true,
+              autoPlayAnimationDuration: const Duration(seconds: 1),
               height: 600,
               viewportFraction: 1,
             ),

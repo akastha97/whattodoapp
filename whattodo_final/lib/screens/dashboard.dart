@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:whattodo_final/models/card_model.dart';
+import '../ui_components/custom_appbar.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -9,12 +10,57 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  bool displayCards = false;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body:  Center(
-        child: Text("This is dashboard"),
-      ),
-    );
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: CustomAppbar(
+          isDisplay: true,
+          customAction: () {
+            showCards();
+          },
+        ),
+        body: Column(children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Visibility(
+            visible: displayCards,
+            child: Flexible(
+                child: ListView.builder(
+              itemCount: CustomCardsModel.customCardsModelList.length,
+              itemBuilder: ((context, index) => Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, "/eventsscreen");
+                      },
+                      child: Container(
+                        height: 150,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          elevation: 5,
+                          child: Center(
+                            child: Text(CustomCardsModel
+                                .customCardsModelList[index].title),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )),
+            )),
+          ),
+        ]));
+  }
+
+  bool showCards() {
+    setState(() {
+      displayCards = true;
+    });
+    return displayCards;
   }
 }
