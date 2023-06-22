@@ -11,6 +11,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool displayCards = false;
+  bool displayCentertext = true;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
             showCards();
           },
         ),
-        body: Column(children: [
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const SizedBox(
             height: 20,
+          ),
+          Visibility(
+            visible: displayCentertext,
+            child: const Center(
+                child: Text(
+              "Click the pencil icon to add your lists",
+              style: TextStyle(fontSize: 16),
+            )),
           ),
           Visibility(
             visible: displayCards,
@@ -35,7 +44,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     padding: const EdgeInsets.only(left: 20.0, right: 20),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/eventsscreen");
+                        Navigator.pushNamed(
+                            context,
+                            CustomCardsModel
+                                .customCardsModelList[index].route);
                       },
                       child: Container(
                         height: 150,
@@ -60,6 +72,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   bool showCards() {
     setState(() {
       displayCards = true;
+      displayCentertext = false;
     });
     return displayCards;
   }

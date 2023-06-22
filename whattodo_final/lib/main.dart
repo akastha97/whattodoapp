@@ -4,6 +4,8 @@ import 'package:whattodo_final/models/carousel_model.dart';
 import 'package:whattodo_final/screens/dashboard.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:whattodo_final/screens/events.dart';
+import 'package:whattodo_final/screens/journal_screen.dart';
+import 'package:whattodo_final/screens/todo_screen.dart';
 
 import 'ui_components/custom_appbar.dart';
 
@@ -26,11 +28,14 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
   }
 
   // This is for the body of the main screen
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
         '/dashboard': (context) => const DashboardScreen(),
         '/eventsscreen': (context) => const EventsScreen(),
+        '/journalscreen': (context) => const JournalScreen(),
+        '/todoscreen': (context) =>  TodoScreen(),
       },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
