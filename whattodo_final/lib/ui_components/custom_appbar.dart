@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   final Function? customAction;
   final bool isDisplay;
-  const CustomAppbar({Key? key, this.customAction, required this.isDisplay})
+  final bool showBackButton;
+  const CustomAppbar(
+      {Key? key,
+      this.customAction,
+      required this.isDisplay,
+      required this.showBackButton})
       : super(key: key);
 
   @override
@@ -17,7 +22,10 @@ class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false,
+      iconTheme: IconThemeData(
+    color: Colors.cyan, //change your color here
+  ),
+      automaticallyImplyLeading: widget.showBackButton,
       elevation: 0,
       backgroundColor: Colors.white,
       centerTitle: true,

@@ -41,6 +41,7 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
       home: Scaffold(
         appBar: const CustomAppbar(
           isDisplay: false,
+          showBackButton: false,
         ),
         body: SingleChildScrollView(
           child: Column(

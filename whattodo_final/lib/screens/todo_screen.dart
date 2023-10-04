@@ -14,7 +14,10 @@ class _TodoScreenState extends State<TodoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(isDisplay: false),
+      appBar: const CustomAppbar(
+        isDisplay: false,
+        showBackButton: true,
+      ),
       body: Column(
         children: [
           ListView.builder(

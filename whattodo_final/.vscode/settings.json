@@ -1,3 +1,4 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "cmake.sourceDirectory": "/Users/aishwaryakasthala/Documents/MyFlutterApps/whattodoapp/whattodo_final/linux/flutter"
 }

@@ -18,6 +18,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppbar(
+          showBackButton: false,
           isDisplay: true,
           customAction: () {
             showCards();
