@@ -1,3 +1,4 @@
+// This is a model class for ToDo items
 
 class TodoItem {
   String title;

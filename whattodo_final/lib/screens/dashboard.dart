@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:whattodo_final/models/card_model.dart';
+import 'package:whattodo_final/consts.dart';
+import 'package:whattodo_final/screens/todo_screen.dart';
+
 import '../ui_components/custom_appbar.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -16,65 +18,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xff1D3461),
         appBar: CustomAppbar(
           showBackButton: false,
           isDisplay: true,
           customAction: () {
-            showCards();
+            showBodyText();
           },
         ),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          const SizedBox(
-            height: 20,
-          ),
           Visibility(
             visible: displayCentertext,
             child: const Center(
-                child: Text(
-              "Click the pencil icon to add your lists",
-              style: TextStyle(fontSize: 16),
-            )),
+              child: Text(
+                AppConstants.pencilText,
+                style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           Visibility(
-            visible: displayCards,
-            child: Flexible(
-                child: ListView.builder(
-              itemCount: CustomCardsModel.customCardsModelList.length,
-              itemBuilder: ((context, index) => Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context,
-                            CustomCardsModel
-                                .customCardsModelList[index].route);
-                      },
-                      child: Container(
-                        height: 150,
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          elevation: 5,
-                          child: Center(
-                            child: Text(CustomCardsModel
-                                .customCardsModelList[index].title),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )),
-            )),
+            visible: !displayCentertext,
+            child: Expanded(child: TodoScreen()),
           ),
         ]));
   }
 
-  bool showCards() {
+  // This method is to toggle the body text on the screen once the pencil icon is clicked.
+  bool showBodyText() {
     setState(() {
-      displayCards = true;
       displayCentertext = false;
     });
-    return displayCards;
+    return displayCentertext;
   }
 }

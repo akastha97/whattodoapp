@@ -10,12 +10,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter:
     sdk: flutter
-  flutter_neat_and_clean_calendar: ^0.3.13+28
-  table_calendar: ^3.0.9
 carousel_slider: ^4.2.1 
-flutter_neat_and_clean_calendar: ^0.3.13+28
-table_calendar: ^3.0.0
-
 
 dev_dependencies:
   flutter_test:
@@ -26,7 +21,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - lib/assets/todo-image.png
-    - lib/assets/todo-2.png
-    - lib/assets/todo-3.png
     - lib/assets/

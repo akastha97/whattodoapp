@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:whattodo_final/models/carousel_model.dart';
-import 'package:whattodo_final/screens/dashboard.dart';
 import 'package:flutter/scheduler.dart' show timeDilation;
-import 'package:whattodo_final/screens/events.dart';
-import 'package:whattodo_final/screens/journal_screen.dart';
+import 'package:whattodo_final/consts.dart';
+import 'package:whattodo_final/screens/dashboard.dart';
 import 'package:whattodo_final/screens/todo_screen.dart';
+import 'package:whattodo_final/theme.dart';
+import 'package:whattodo_final/ui_components/custom_carousel.dart';
 
 import 'ui_components/custom_appbar.dart';
 
@@ -31,14 +30,15 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: lightMode,
+      darkTheme: darkMode,
       routes: {
         '/dashboard': (context) => const DashboardScreen(),
-        '/eventsscreen': (context) => const EventsScreen(),
-        '/journalscreen': (context) => const JournalScreen(),
-        '/todoscreen': (context) =>  TodoScreen(),
+        '/todoscreen': (context) => TodoScreen(),
       },
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: const Color(0xff1D3461),
         appBar: const CustomAppbar(
           isDisplay: false,
           showBackButton: false,
@@ -47,12 +47,9 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 30,
-              ),
-              buildCarousel(),
-              const SizedBox(
-                height: 40,
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: buildCarousel(),
               ),
               buildGetStartedButton(context),
             ],
@@ -71,16 +68,16 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               elevation: 10,
-              backgroundColor: Colors.deepOrange),
+              backgroundColor: const Color(0xff376996)),
           onPressed: () {
-            Navigator.of(context).push(navigateToDashboard());
+            Navigator.of(context).push(navigateToDashboardScreen());
           },
-          child: const Text("Get Started"));
+          child: const Text(AppConstants.getStarted));
     });
   }
 
-  // animation for splash
-  Route navigateToDashboard() {
+  // This method is to navigate to the dashboard screen with animation
+  Route navigateToDashboardScreen() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
           const DashboardScreen(),
@@ -97,78 +94,6 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
           child: child,
         );
       },
-    );
-  }
-
-  // This is to display the carousel slider
-  Widget buildCarousel() {
-    return Container(
-      height: 600,
-      decoration: const BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            spreadRadius: 3,
-            color: Colors.cyan,
-            blurRadius: 2,
-          )
-        ],
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30)),
-      ),
-      child: Column(
-        children: [
-          CarouselSlider.builder(
-            itemCount: CarouselModel.carouselModelList.length,
-            options: CarouselOptions(
-              autoPlayCurve: Curves.decelerate,
-              autoPlay: true,
-              autoPlayAnimationDuration: const Duration(seconds: 1),
-              height: 600,
-              viewportFraction: 1,
-            ),
-            itemBuilder: (BuildContext context, int itemIndex, int index) {
-              return buildView(itemIndex);
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  // This is to display the contents of the carousel slider
-  Container buildView(int index) {
-    final carouselModel = CarouselModel.carouselModelList[index];
-    return Container(
-      // width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(horizontal: 1.0),
-      decoration: const BoxDecoration(
-        color: Colors.white12,
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset(
-              carouselModel.assetPath,
-              height: 350,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(carouselModel.heading),
-          const Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-                "Organize all your tasks in lists and projects. Color tag them to set priorities and categories.",
-                textAlign: TextAlign.center),
-          ),
-        ],
-      ),
     );
   }
 }
