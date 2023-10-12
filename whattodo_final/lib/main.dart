@@ -3,7 +3,6 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 import 'package:whattodo_final/consts.dart';
 import 'package:whattodo_final/screens/dashboard.dart';
 import 'package:whattodo_final/screens/todo_screen.dart';
-import 'package:whattodo_final/theme.dart';
 import 'package:whattodo_final/ui_components/custom_carousel.dart';
 
 import 'ui_components/custom_appbar.dart';
@@ -29,9 +28,7 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
   // This is for the body of the main screen
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: lightMode,
-      darkTheme: darkMode,
+    return MaterialApp( 
       routes: {
         '/dashboard': (context) => const DashboardScreen(),
         '/todoscreen': (context) => TodoScreen(),
