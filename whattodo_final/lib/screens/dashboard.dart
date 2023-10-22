@@ -111,9 +111,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Text(
                 CategoryModel.categoryList[index].categoryName,
                 style: const TextStyle(
+                  fontFamily: "Playpen Sans",
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  
                 ),
               ),
               Visibility(

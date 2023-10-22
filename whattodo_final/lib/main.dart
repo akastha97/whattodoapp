@@ -45,6 +45,7 @@ class _MainAppState extends State<MainApp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(fontFamily: "Playpen Sans"),
       routes: {
         '/dashboard': (context) => const DashboardScreen(),
       },

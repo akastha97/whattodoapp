@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_slidable: ^3.0.0
+  google_fonts: ^4.0.4
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   
@@ -28,4 +29,9 @@ flutter:
   assets:
     - lib/assets/
     - lib/assets/appbar-bg.png
-    
+  fonts:
+  - family: Playpen Sans
+    fonts:
+    - asset: lib/assets/fonts/PlaypenSans-Regular.ttf
+    - asset: lib/assets/fonts/PlaypenSans-Bold.ttf
+      
