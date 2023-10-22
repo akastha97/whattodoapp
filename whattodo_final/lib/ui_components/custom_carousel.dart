@@ -42,7 +42,8 @@ Container buildView(int index) {
   final carouselModel = CarouselModel.carouselModelList[index];
   return Container(
     margin: const EdgeInsets.symmetric(horizontal: 1.0),
-    decoration: const BoxDecoration(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(30),
       color: Colors.white12,
     ),
     child: Column(

@@ -69,46 +69,50 @@ class _TodoScreenState extends State<TodoScreen> {
         return Padding(
           padding: const EdgeInsets.only(top: 20),
           child: Container(
+            
             margin: EdgeInsets.all(20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.white)),
-            child: ListTile(
-              dense: true,
-              leading: Checkbox(
-                side: const BorderSide(
-                  color: Colors.white,
-                  width: 2.0,
+            child: Card(
+              color: Color(0xffC0CFEC),
+              child: ListTile(
+                dense: true,
+                leading: Checkbox(
+                  side: const BorderSide(
+                    color: Colors.white,
+                    width: 2.0,
+                  ),
+                  activeColor: Colors.red,
+                  checkColor: Colors.white,
+                  value: todos[index].completed,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  onChanged: (value) {
+                    print("Checkbox tapped: $value");
+                    todoComplete(index);
+                  },
                 ),
-                activeColor: Colors.red,
-                checkColor: Colors.white,
-                value: todos[index].completed,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0),
+                title: Text(
+                  todos[index].title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: todos[index].completed ? Colors.red : Colors.white,
+                    decoration: todos[index].completed
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                  ),
                 ),
-                onChanged: (value) {
-                  print("Checkbox tapped: $value");
-                  todoComplete(index);
-                },
-              ),
-              title: Text(
-                todos[index].title,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: todos[index].completed ? Colors.red : Colors.white,
-                  decoration: todos[index].completed
-                      ? TextDecoration.lineThrough
-                      : TextDecoration.none,
+                trailing: IconButton(
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.red[200],
+                  ),
+                  onPressed: () {
+                    deleteTodoAtIndex(index);
+                  },
                 ),
-              ),
-              trailing: IconButton(
-                icon: Icon(
-                  Icons.delete,
-                  color: Colors.red[200],
-                ),
-                onPressed: () {
-                  deleteTodoAtIndex(index);
-                },
               ),
             ),
           ),
@@ -124,41 +128,44 @@ class _TodoScreenState extends State<TodoScreen> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.white)),
-      child: ListTile(
-        dense: true,
-        leading: Checkbox(
-          side: const BorderSide(
-            color: Color(0xffC0CFEC),
-            width: 2.0,
+      child: Card(
+        color: Color(0xffC0CFEC),
+        child: ListTile(
+          dense: true,
+          leading: Checkbox(
+            side: const BorderSide(
+              color: Color(0xffC0CFEC),
+              width: 2.0,
+            ),
+            checkColor: Colors.white,
+            activeColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            value: false,
+            onChanged: (value) {},
           ),
-          checkColor: Colors.white,
-          activeColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
+          title: TextField(
+            style: const TextStyle(color: Colors.white),
+            controller: textController,
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              focusColor: Color(0xffC0CFEC),
+              hintStyle:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+              hintText: 'Add your task',
+            ),
           ),
-          value: false,
-          onChanged: (value) {},
-        ),
-        title: TextField(
-          style: const TextStyle(color: Colors.white),
-          controller: textController,
-          decoration: const InputDecoration(
-            border: InputBorder.none,
-            focusColor: Color(0xffC0CFEC),
-            hintStyle:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
-            hintText: 'Add your task',
+          trailing: IconButton(
+            icon: const Icon(
+              Icons.add_task,
+              size: 26,
+              color: Color(0xffF8BEE2),
+            ),
+            onPressed: () {
+              addTodo();
+            },
           ),
-        ),
-        trailing: IconButton(
-          icon: const Icon(
-            Icons.add_task,
-            size: 26,
-            color: Color(0xffF8BEE2),
-          ),
-          onPressed: () {
-            addTodo();
-          },
         ),
       ),
     );
