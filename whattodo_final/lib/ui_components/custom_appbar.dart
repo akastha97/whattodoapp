@@ -5,11 +5,17 @@ class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   final Function? customAction;
   final bool isDisplay;
   final bool showBackButton;
+  final bool showHeadText;
+  final String headText;
+  
   const CustomAppbar(
       {Key? key,
       this.customAction,
       required this.isDisplay,
-      required this.showBackButton})
+      required this.showBackButton,
+      required this.showHeadText,
+      required this.headText
+      })
       : super(key: key);
 
   @override
@@ -23,35 +29,25 @@ class _CustomAppbarState extends State<CustomAppbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      iconTheme: IconThemeData(
+      iconTheme: const IconThemeData(
         color: Color(0xff1F487E), //change your color here
       ),
       automaticallyImplyLeading: widget.showBackButton,
       elevation: 0,
       backgroundColor: Colors.white,
       centerTitle: true,
-      actions: <Widget>[
-        Visibility(
-          visible: widget.isDisplay,
-          child: Padding(
-              padding: const EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {
-                  widget.customAction!();
-                },
-                child: const Icon(
-                  Icons.edit,
-                  color: Colors.cyan,
-                  size: 28,
-                ),
-              )),
-        ),
-      ],
-      title: Image.asset(
-        "lib/assets/cn.png",
-        width: 200,
-        height: 250,
-      ),
+      title: widget.showHeadText
+          ? Text(
+              widget.headText,
+              style: const TextStyle(
+                  color: Colors.pink,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            )
+          : Image.asset(
+              "lib/assets/appbar-logo.png",
+              height: 200,
+            ),
     );
   }
 }
