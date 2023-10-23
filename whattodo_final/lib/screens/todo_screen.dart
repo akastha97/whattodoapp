@@ -69,7 +69,6 @@ class _TodoScreenState extends State<TodoScreen> {
         return Padding(
           padding: const EdgeInsets.only(top: 20),
           child: Container(
-            
             margin: EdgeInsets.all(20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -80,10 +79,10 @@ class _TodoScreenState extends State<TodoScreen> {
                 dense: true,
                 leading: Checkbox(
                   side: const BorderSide(
-                    color: Colors.white,
-                    width: 2.0,
+                    color: Colors.pink,
+                    width: 2.5,
                   ),
-                  activeColor: Colors.red,
+                  activeColor: Colors.pink,
                   checkColor: Colors.white,
                   value: todos[index].completed,
                   shape: RoundedRectangleBorder(
@@ -98,16 +97,17 @@ class _TodoScreenState extends State<TodoScreen> {
                   todos[index].title,
                   style: TextStyle(
                     fontSize: 16,
-                    color: todos[index].completed ? Colors.red : Colors.white,
+                    fontWeight: FontWeight.w500,
+                    color: todos[index].completed ? Colors.red : Colors.black,
                     decoration: todos[index].completed
                         ? TextDecoration.lineThrough
                         : TextDecoration.none,
                   ),
                 ),
                 trailing: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.delete,
-                    color: Colors.red[200],
+                    color: Colors.red,
                   ),
                   onPressed: () {
                     deleteTodoAtIndex(index);
@@ -133,26 +133,29 @@ class _TodoScreenState extends State<TodoScreen> {
         child: ListTile(
           dense: true,
           leading: Checkbox(
-            side: const BorderSide(
-              color: Color(0xffC0CFEC),
-              width: 2.0,
-            ),
-            checkColor: Colors.white,
-            activeColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            value: false,
-            onChanged: (value) {},
-          ),
+              side: const BorderSide(
+                color: Colors.pink,
+                width: 2.5,
+              ),
+              activeColor: Colors.pink,
+              checkColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              value: false,
+              onChanged: null),
           title: TextField(
-            style: const TextStyle(color: Colors.white),
+            autocorrect: false,
+            cursorColor: Colors.black,
+            style: const TextStyle(color: Colors.black),
             controller: textController,
             decoration: const InputDecoration(
               border: InputBorder.none,
               focusColor: Color(0xffC0CFEC),
-              hintStyle:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+              hintStyle: TextStyle(
+                  color: Colors.black26,
+                  fontWeight: FontWeight.w100,
+                  fontStyle: FontStyle.italic),
               hintText: 'Add your task',
             ),
           ),
@@ -160,7 +163,7 @@ class _TodoScreenState extends State<TodoScreen> {
             icon: const Icon(
               Icons.add_task,
               size: 26,
-              color: Color(0xffF8BEE2),
+              color: Colors.pink,
             ),
             onPressed: () {
               addTodo();
