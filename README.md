@@ -67,12 +67,16 @@ Also, you can clone this repo and run the app via Visual Studio code/ Xcode.
 ### Files: 
 1.	consts.dart: This file contains all the constants like strings used in the application. 
 
-### Fonts used in the app: Playpen Sans (downloaded from Google Fonts) 
-### Icons: Designed in canva.com
+#### Fonts used in the app: 
+Playpen Sans (downloaded from Google Fonts) 
+#### Icons: 
+Designed in canva.com
 
-## Version Control: Code is available to the dev branch. Commits and pushes done via Github desktop application. 
+## Version Control: 
+Code is available to the dev branch. Commits and pushes done via Github desktop application. 
 
-## Testing: Done on multiple iOS simulators, and android phones. 
+## Testing: 
+Done on multiple iOS simulators, and android phones. 
 
 ## App Screenshots: 
 Screenshots taken on iPhone 14 Plus simulator. 
