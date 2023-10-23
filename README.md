@@ -1,2 +1,1 @@
-# whattodoapp
-This is a classic To Do application with some interactive UI
+Readme can be found on Master branch. 
