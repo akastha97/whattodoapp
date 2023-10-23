@@ -16,7 +16,6 @@ Flutter framework and Dart programming language.
 This app is developed in Flutter framework, generates both iOS and Android apps. 
 
 ### Installation: 
-Download and install this apk file for android:
 Also, you can clone this repo and run the app via Visual Studio code/ Xcode. 
 
 ### App Features: 
