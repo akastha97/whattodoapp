@@ -4,6 +4,9 @@ import 'package:whattodo_final/screens/dashboard.dart';
 import 'package:whattodo_final/ui_components/custom_appbar.dart';
 import 'package:whattodo_final/ui_components/custom_carousel.dart';
 
+// This class is for Splashscreen
+// loads everytime the user opens the application. 
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -37,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  // This is to display the Get started button
+  // This is to display the "Get started" button
   Builder buildGetStartedButton(BuildContext context) {
     return Builder(builder: (context) {
       return ElevatedButton(
@@ -54,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
-  // This method is to navigate to the dashboard screen with animation
+  // This method is to navigate from the Splash screen to the dashboard screen with animation
   Route navigateToDashboardScreen() {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>

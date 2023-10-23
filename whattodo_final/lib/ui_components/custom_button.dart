@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+// This custom class is for the buttons in the Alert box. 
 class CustomAlertButton extends StatelessWidget {
   final String buttonTitle;
   final void Function() onclick;
 
-  CustomAlertButton({
+  const CustomAlertButton({
     Key? key,
     required this.buttonTitle,
     required this.onclick,

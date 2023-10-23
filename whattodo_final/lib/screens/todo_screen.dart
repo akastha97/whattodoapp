@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:whattodo_final/consts.dart';
 import 'package:whattodo_final/manager/hive_manager.dart';
 import 'package:whattodo_final/ui_components/custom_appbar.dart';
 
 import '../models/todo_model.dart';
 
-// This class is to dislay the ToDO UI on the dashboard  screen
+// This class is to dislay the ToDo screen
+// where the user can add, remove the todos 
+
 class TodoScreen extends StatefulWidget {
   final String category;
 
@@ -21,11 +24,9 @@ class _TodoScreenState extends State<TodoScreen> {
   @override
   void initState() {
     super.initState();
-
-    print("initState called");
     // Load Todo data when the screen is initialized
     manager.loadTodoDataForCategory(widget.category);
-
+    
     setState(() {
       todos = manager.getDefaultTodoDataForCategory(widget.category);
     });
@@ -39,8 +40,7 @@ class _TodoScreenState extends State<TodoScreen> {
         showHeadText: true,
         isDisplay: true,
         customAction: () {
-          // go back to previous screen
-          // nothing required now
+            // nothing required 
         },
         showBackButton: true,
       ),
@@ -59,7 +59,8 @@ class _TodoScreenState extends State<TodoScreen> {
     );
   }
 
-  // This method is to display the To-Do listview
+  // This method is to display the To-Do listview builder
+  // to show all the Todo listview items. 
   Widget displayTodoListBuilder() {
     return ListView.builder(
       shrinkWrap: true,
@@ -121,7 +122,8 @@ class _TodoScreenState extends State<TodoScreen> {
     );
   }
 
-  // This method is to display the to do listtile
+  // This method is to display the to do the empty Listtile
+  // where user can enter the Todo and add it to the todo list
   Widget addTodoListtile() {
     return Container(
       margin: EdgeInsets.only(left: 20, right: 20),
@@ -156,7 +158,7 @@ class _TodoScreenState extends State<TodoScreen> {
                   color: Colors.black26,
                   fontWeight: FontWeight.w100,
                   fontStyle: FontStyle.italic),
-              hintText: 'Add your task',
+              hintText: AppConstants.hintText,
             ),
           ),
           trailing: IconButton(
@@ -174,7 +176,8 @@ class _TodoScreenState extends State<TodoScreen> {
     );
   }
 
-  // This method is to record if the to-do has been completed
+  // This method is to record if the to-do has been completed or not
+  // also updating the Hive box.
   void todoComplete(int index) {
     setState(() {
       todos[index].completed = !todos[index].completed;
@@ -185,8 +188,8 @@ class _TodoScreenState extends State<TodoScreen> {
     });
   }
 
-  // This method is to delete the to-do
-// This method is to delete the to-do
+  // This method is to delete the to-do  
+  // and then to update the Hive box
   void deleteTodoAtIndex(int index) {
     setState(() {
       if (index >= 0 && index < todos.length) {
@@ -196,7 +199,10 @@ class _TodoScreenState extends State<TodoScreen> {
       }
     });
   }
-
+  
+  // This method is to add the new todo to the todo list items
+  // along with updating the Hive box
+  // then clearing the textfield
   void addTodo() {
     if (textController.text.isNotEmpty) {
       TodoItem newTodo = TodoItem(title: textController.text);

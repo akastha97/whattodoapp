@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// This class is for the app bar
+// This class is for the Custom Appbar 
 class CustomAppbar extends StatefulWidget implements PreferredSizeWidget {
   final Function? customAction;
   final bool isDisplay;
@@ -30,7 +30,7 @@ class _CustomAppbarState extends State<CustomAppbar> {
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: const IconThemeData(
-        color: Color(0xff1F487E), //change your color here
+        color: Color(0xff1F487E), 
       ),
       automaticallyImplyLeading: widget.showBackButton,
       elevation: 0,

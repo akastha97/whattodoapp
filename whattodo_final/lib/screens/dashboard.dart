@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:whattodo_final/consts.dart';
 import 'package:whattodo_final/manager/hive_manager.dart';
 import 'package:whattodo_final/models/category_model.dart';
 import 'package:whattodo_final/screens/todo_screen.dart';
 import 'package:whattodo_final/ui_components/custom_button.dart';
+
+// This class is for Dashboard screen 
+// Which shows all the Todo categories
+// along with a FAB to enter a new category
+// and to delete a category 
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -44,7 +50,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // This method is to display the Dashboard top appbars
+  // This method is to display the Dashboard top container box  for styling
   Image displayTopContainer() {
     return Image.asset(
       "lib/assets/final-appbarlook.png",
@@ -55,7 +61,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   // This widget is to display the body of the Dashboard screen
-  // where we can display the category cards and can add a category by the user
+  // where all the category cards are displayed
   Widget displayDashboardBody() {
     return Column(
       children: [
@@ -155,12 +161,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // This is to  display the add category alert dialog box
-  // To add the newly created category to the category list.
+  // This is to  display the add category alert dialog box, with "Add" and "Cancel" buttons
   AlertDialog addCategoryAlert() {
     return AlertDialog(
       title: const Text(
-        "Add a category",
+        AppConstants.addCatText,
         style: TextStyle(fontSize: 16),
       ),
       content: TextField(
@@ -175,7 +180,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           child: Wrap(
             children: [
               CustomAlertButton(
-                buttonTitle: "Add",
+                buttonTitle: AppConstants.addButtonText,
                 onclick: () async {
                   setState(() {
                     CategoryModel.categoryList.add(
@@ -192,7 +197,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 width: 10,
               ),
               CustomAlertButton(
-                  buttonTitle: "Cancel",
+                  buttonTitle: AppConstants.cancelButtonText,
                   onclick: () {
                     Navigator.pop(context);
                   }),
@@ -203,7 +208,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // Method to delete the selected category card
+  // Method to delete the selected category card on longpress
   void deleteCategoryCard(int index) {
     setState(() {
       CategoryModel.categoryList.removeAt(index);

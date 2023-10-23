@@ -3,22 +3,26 @@ import 'package:whattodo_final/models/category_model.dart';
 import 'package:whattodo_final/models/todo_model.dart';
 
 // This class deals with all the Crud operations related to Hive
+
 class HiveManager {
   List<CategoryModel> _catList = [];
   List<TodoItem> _todoList = [];
 
   // Referring to category box
   final categoryBox = Hive.box("categoryBox");
-
+  // Referring to Todo box
   final todoBox = Hive.box("todoBox");
 
   bool dataLoaded = false;
-
+  
+  // method to get default category data when the app is loaded for the first time 
   List<CategoryModel> getdefaultCategoryData() {
     _catList = CategoryModel.categoryList;
     return _catList;
   }
 
+  // method to load the all the existing category data 
+  // including the default ones and newly added categories
   void loadCategoryData() {
     if (!dataLoaded) {
       _catList = categoryBox.get("CATEGORY").cast<CategoryModel>();
@@ -26,7 +30,8 @@ class HiveManager {
       dataLoaded = true;
     }
   }
-
+  
+  // Method to update the Category Hive box
   Future<void> updateCategoryData() async {
     await categoryBox.put("CATEGORY", _catList);
   }
@@ -37,7 +42,7 @@ class HiveManager {
   }
 
   // Method to load Todo items for the specific category when new todo data is added
-  // and app gets refreshed
+  // and when app gets refreshed
   void loadTodoDataForCategory(String category) {
     if (!dataLoaded) {
       _todoList = getDefaultTodoDataForCategory(category);

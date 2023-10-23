@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:whattodo_final/models/carousel_model.dart';
 
-// This class is to display the carousel slider
+// This class is to display the Carousel slider
 Widget buildCarousel() {
   return Container(
     height: 600,
@@ -37,7 +37,7 @@ Widget buildCarousel() {
   );
 }
 
-// This is to display the contents of the carousel slider
+// This is to display the contents of the Carousel slider
 Container buildView(int index) {
   final carouselModel = CarouselModel.carouselModelList[index];
   return Container(
