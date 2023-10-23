@@ -6,7 +6,7 @@ import 'package:whattodo_final/ui_components/custom_appbar.dart';
 import '../models/todo_model.dart';
 
 // This class is to dislay the ToDo screen
-// where the user can add, remove the todos 
+// where the user can add, remove the todos
 
 class TodoScreen extends StatefulWidget {
   final String category;
@@ -26,7 +26,7 @@ class _TodoScreenState extends State<TodoScreen> {
     super.initState();
     // Load Todo data when the screen is initialized
     manager.loadTodoDataForCategory(widget.category);
-    
+
     setState(() {
       todos = manager.getDefaultTodoDataForCategory(widget.category);
     });
@@ -40,7 +40,7 @@ class _TodoScreenState extends State<TodoScreen> {
         showHeadText: true,
         isDisplay: true,
         customAction: () {
-            // nothing required 
+          // nothing required
         },
         showBackButton: true,
       ),
@@ -50,6 +50,9 @@ class _TodoScreenState extends State<TodoScreen> {
           padding: const EdgeInsets.only(bottom: 24.0),
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
               displayTodoListBuilder(),
               addTodoListtile(),
             ],
@@ -60,7 +63,7 @@ class _TodoScreenState extends State<TodoScreen> {
   }
 
   // This method is to display the To-Do listview builder
-  // to show all the Todo listview items. 
+  // to show all the Todo listview items.
   Widget displayTodoListBuilder() {
     return ListView.builder(
       shrinkWrap: true,
@@ -188,7 +191,7 @@ class _TodoScreenState extends State<TodoScreen> {
     });
   }
 
-  // This method is to delete the to-do  
+  // This method is to delete the to-do
   // and then to update the Hive box
   void deleteTodoAtIndex(int index) {
     setState(() {
@@ -199,7 +202,7 @@ class _TodoScreenState extends State<TodoScreen> {
       }
     });
   }
-  
+
   // This method is to add the new todo to the todo list items
   // along with updating the Hive box
   // then clearing the textfield

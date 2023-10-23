@@ -5,7 +5,7 @@ class AppConstants {
   static const double timeDilationSecs = 2;
   static const splashText1 = "Manage your tasks!!";
   static const splashText2 = "Keep your life together!!";
-  static const splashText3 = "Never miss a deadline!!";
+  static const splashText3 = "Get Disciplined!!";
   static const getStarted = "Get Started";
   static const pencilText = "Click the pencil icon to add your To-Do's!";
   static const hintText = "Add your task";
